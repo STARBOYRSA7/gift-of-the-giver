@@ -1,0 +1,71 @@
+﻿@model List<gift_of_the_giver.Models.DonationModel>
+
+@{
+    ViewData["Title"] = "Submit Donation";
+}
+
+<div class="container mt-4">
+
+    <h2 class="text-success text-center">Submit a Donation</h2>
+
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert alert-success">@ViewBag.Message</div>
+    }
+
+    <form asp-action="Submit" method="post" class="p-3 bg-light rounded shadow">
+        <div class="mb-3">
+            <label class="form-label">Donor Name</label>
+            <input type="text" name="DonorName" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Resource Type</label>
+            <input type="text" name="ResourceType" class="form-control" placeholder="Food, Clothes, Medical" required />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Description</label>
+            <textarea name="Description" class="form-control" rows="3" required></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Quantity</label>
+            <input type="number" name="Quantity" class="form-control" min="1" required />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Date</label>
+            <input type="date" name="Date" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-success">Submit Donation</button>
+    </form>
+
+    <hr />
+
+    <h3 class="text-success mt-4">All Donations</h3>
+    <table class="table table-bordered table-striped">
+        <thead class="table-success">
+            <tr>
+                <th>Donor Name</th>
+                <th>Resource Type</th>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var donation in Model)
+            {
+                <tr>
+                    <td>@donation.DonorName</td>
+                    <td>@donation.ResourceType</td>
+                    <td>@donation.Description</td>
+                    <td>@donation.Quantity</td>
+                    <td>@donation.Date.ToShortDateString()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

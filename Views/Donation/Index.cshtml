@@ -1,0 +1,35 @@
+﻿@model List<gift_of_the_giver.Models.DonationModel>
+@{
+    ViewData["Title"] = "Donate Resources";
+}
+<h2>Donate Resources</h2>
+
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-success">@ViewBag.Message</div>
+}
+
+<form asp-action="Index" method="post" class="mb-3">
+    <input type="text" name="ResourceType" class="form-control mb-2" placeholder="Resource Type" required />
+    <input type="number" name="Quantity" class="form-control mb-2" placeholder="Quantity" required />
+    <button type="submit" class="btn btn-warning">Donate</button>
+</form>
+
+@if (Model.Count > 0)
+{
+    <h4>Donations</h4>
+    <table class="table table-striped">
+        <thead>
+            <tr><th>Resource</th><th>Quantity</th></tr>
+        </thead>
+        <tbody>
+            @foreach (var d in Model)
+            {
+                <tr>
+                    <td>@d.ResourceType</td>
+                    <td>@d.Quantity</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

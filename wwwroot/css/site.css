@@ -1,0 +1,40 @@
+/* Green & White Theme - Centered */
+body {
+    background-color: #ffffff;
+    color: #0f5132; /* dark green text */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.navbar.bg-green {
+    background-color: #198754 !important; /* bootstrap green */
+}
+
+.nav-link.text-white {
+    color: #ffffff !important;
+}
+
+    .nav-link.text-white:hover {
+        color: #d4edda !important; /* light green hover */
+    }
+
+footer.bg-green {
+    background-color: #198754 !important;
+}
+
+h1, h2, h3, p, form {
+    text-align: center;
+}
+
+/* Buttons */
+.btn-primary, .btn-success, .btn-warning {
+    background-color: #198754 !important;
+    border-color: #198754 !important;
+    color: #ffffff !important;
+}
+
+    .btn-primary:hover, .btn-success:hover, .btn-warning:hover {
+        background-color: #146c43 !important;
+        border-color: #146c43 !important;
+    }

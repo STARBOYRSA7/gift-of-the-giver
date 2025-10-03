@@ -1,0 +1,67 @@
+﻿@model List<gift_of_the_giver.Models.DisasterModel>
+
+@{
+    ViewData["Title"] = "Report a Disaster";
+}
+
+<div class="container mt-4">
+
+    <h2 class="text-success text-center">Report a Disaster</h2>
+
+    <!-- Success Message -->
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert alert-success">@ViewBag.Message</div>
+    }
+
+    <!-- Disaster Report Form -->
+    <form asp-action="Report" method="post" class="p-3 bg-light rounded shadow">
+        <div class="mb-3">
+            <label class="form-label">Disaster Type</label>
+            <input type="text" name="DisasterType" class="form-control" placeholder="Flood, Fire, etc." required />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Location</label>
+            <input type="text" name="Location" class="form-control" placeholder="City, Area" required />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Description</label>
+            <textarea name="Description" class="form-control" rows="3" placeholder="Describe the incident" required></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Date</label>
+            <input type="date" name="Date" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-success">Submit Report</button>
+    </form>
+
+    <hr />
+
+    <!-- Table of Submitted Reports -->
+    <h3 class="text-success mt-4">Submitted Reports</h3>
+    <table class="table table-bordered table-striped">
+        <thead class="table-success">
+            <tr>
+                <th>Type</th>
+                <th>Location</th>
+                <th>Description</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var report in Model)
+            {
+                <tr>
+                    <td>@report.DisasterType</td>
+                    <td>@report.Location</td>
+                    <td>@report.Description</td>
+                    <td>@report.Date.ToShortDateString()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

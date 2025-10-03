@@ -1,0 +1,74 @@
+﻿@model List<gift_of_the_giver.Models.VolunteerModel>
+
+@{
+    ViewData["Title"] = "Volunteer Registration";
+}
+
+<div class="container mt-4">
+
+    <h2 class="text-success text-center">Volunteer Registration</h2>
+
+    <!-- Success message -->
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert alert-success">@ViewBag.Message</div>
+    }
+
+    <!-- Volunteer Registration Form -->
+    <form asp-action="Register" method="post" class="p-3 bg-light rounded shadow">
+        <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input type="text" name="Name" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" name="Email" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Task</label>
+            <input type="text" name="Task" class="form-control" placeholder="Assigned Task" required />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Schedule</label>
+            <input type="text" name="Schedule" class="form-control" placeholder="Mon-Fri, 9am-12pm" required />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Date Joined</label>
+            <input type="date" name="DateJoined" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-success">Register Volunteer</button>
+    </form>
+
+    <hr />
+
+    <!-- Table of Volunteers -->
+    <h3 class="text-success mt-4">All Volunteers</h3>
+    <table class="table table-bordered table-striped">
+        <thead class="table-success">
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Task</th>
+                <th>Schedule</th>
+                <th>Date Joined</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var v in Model)
+            {
+                <tr>
+                    <td>@v.Name</td>
+                    <td>@v.Email</td>
+                    <td>@v.Task</td>
+                    <td>@v.Schedule</td>
+                    <td>@v.DateJoined.ToShortDateString()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

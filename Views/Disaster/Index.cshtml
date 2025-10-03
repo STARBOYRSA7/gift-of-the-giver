@@ -1,0 +1,41 @@
+﻿@model IEnumerable<gift_of_the_giver.Models.DisasterModel>
+
+<h2>Report a Disaster</h2>
+
+<form method="post" class="text-start">
+    <div class="mb-3">
+        <label>Location</label>
+        <input name="Location" class="form-control" required />
+    </div>
+    <div class="mb-3">
+        <label>Disaster Type</label>
+        <input name="DisasterType" class="form-control" required />
+    </div>
+    <div class="mb-3">
+        <label>Description</label>
+        <textarea name="Description" class="form-control"></textarea>
+    </div>
+    <button type="submit" class="btn btn-success">Submit</button>
+</form>
+
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-success mt-3">@ViewBag.Message</div>
+}
+
+<h3 class="mt-4">Reported Disasters</h3>
+<table class="table table-bordered">
+    <tr>
+        <th>Location</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    @foreach (var report in Model)
+    {
+        <tr>
+            <td>@report.Location</td>
+            <td>@report.DisasterType</td>
+            <td>@report.Description</td>
+        </tr>
+    }
+</table>
