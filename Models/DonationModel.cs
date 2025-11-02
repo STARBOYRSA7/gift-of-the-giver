@@ -1,11 +1,9 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace gift_of_the_giver.Models
 {
-    public class DonationModel
+    public class ExistingDonationModel
     {
-        [Required]
         public string DonorName { get; set; } = string.Empty;
 
         [Required]

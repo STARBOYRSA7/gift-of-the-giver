@@ -6,21 +6,26 @@ namespace gift_of_the_giver.Controllers
 {
     public class DisasterController : Controller
     {
-        private static List<DisasterModel> Reports = new();
+        // Temporary in-memory list
+        private static List<DisasterModel> disasters = new List<DisasterModel>();
 
-        public IActionResult Index() => RedirectToAction("Report");
+        // Show list + form
+        public IActionResult Index()
+        {
+            return View(disasters);
+        }
 
-        public IActionResult Report() => View(Reports);
-
+        // Handle form POST
         [HttpPost]
         public IActionResult Report(DisasterModel model)
         {
             if (ModelState.IsValid)
             {
-                Reports.Add(model);
-                ViewBag.Message = "Incident reported successfully!";
+                disasters.Add(model);
+                TempData["Message"] = "Disaster report submitted successfully!";
+                return RedirectToAction("Index");
             }
-            return View(Reports);
+            return View("Index", disasters);
         }
     }
 }

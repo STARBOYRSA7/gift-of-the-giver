@@ -1,26 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using gift_of_the_giver.Models;
-using System.Collections.Generic;
-
-namespace gift_of_the_giver.Controllers
+﻿namespace gift_of_the_giver.Models
 {
-    public class DonationController : Controller
+    // FIX: Make the model public so it's visible to the controller
+    public class DonationModel
     {
-        private static List<DonationModel> Donations = new();
-
-        public IActionResult Index() => RedirectToAction("Submit");
-
-        public IActionResult Submit() => View(Donations);
-
-        [HttpPost]
-        public IActionResult Submit(DonationModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                Donations.Add(model);
-                ViewBag.Message = "Donation submitted successfully!";
-            }
-            return View(Donations);
-        }
+        public string DonorName { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string DonationType { get; set; } = string.Empty;
+        public decimal Amount { get; set; }
+        public string Message { get; set; } = string.Empty;
     }
 }

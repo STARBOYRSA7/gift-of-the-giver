@@ -7,7 +7,7 @@ namespace gift_of_the_giver.Controllers
     {
         public IActionResult Index()
         {
-            if (HttpContext.Session.GetString("UserEmail") == null)
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("Username")))
                 return RedirectToAction("Login", "Account");
 
             return View();
@@ -15,7 +15,7 @@ namespace gift_of_the_giver.Controllers
 
         public IActionResult Privacy()
         {
-            if (HttpContext.Session.GetString("UserEmail") == null)
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("Username")))
                 return RedirectToAction("Login", "Account");
 
             return View();

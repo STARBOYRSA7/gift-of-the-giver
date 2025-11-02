@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using gift_of_the_giver.Models;
 using System.Collections.Generic;
 
@@ -6,25 +7,26 @@ namespace gift_of_the_giver.Controllers
 {
     public class VolunteerController : Controller
     {
-        private static List<VolunteerModel> Volunteers = new();
+        private static List<VolunteerModel> Volunteers = new List<VolunteerModel>();
 
-        // Redirect Index to Register page
-        public IActionResult Index() => RedirectToAction("Register");
-
-        // GET: display form and table
-        public IActionResult Register()
+        public IActionResult Index()
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("Username")))
+                return RedirectToAction("Login", "Account");
+
             return View(Volunteers);
         }
 
-        // POST: handle form submission
         [HttpPost]
-        public IActionResult Register(VolunteerModel model)
+        public IActionResult Index(VolunteerModel model)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("Username")))
+                return RedirectToAction("Login", "Account");
+
             if (ModelState.IsValid)
             {
                 Volunteers.Add(model);
-                ViewBag.Message = "Volunteer registered successfully!";
+                ViewBag.Message = "Volunteer added successfully!";
             }
             return View(Volunteers);
         }
